@@ -79,5 +79,5 @@ jobs:
       uses: actions/download-artifact@v2.1.1
       with:
           name: Artifacts
-          path: build/libs/
+          path: WarpWriggleCLI/build
               
