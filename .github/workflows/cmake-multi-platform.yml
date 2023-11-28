@@ -86,6 +86,7 @@ jobs:
 
           #cd ${{ env.INSTALL_PORTABLE_DIR }}
           tar -czf ../WarpWriggleCLI.tar.gz *
+          ls
 
       
     - name: Upload binary tarball (Linux, portable)
