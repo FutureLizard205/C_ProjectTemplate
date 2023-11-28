@@ -81,10 +81,10 @@ jobs:
     - name: Package (Linux, portable)
       if: runner.os == 'Linux'
       run: |
-          cmake --install ${{ env.BUILD_DIR }} --prefix ${{ env.INSTALL_PORTABLE_DIR }}
-          cmake --install ${{ env.BUILD_DIR }} --prefix ${{ env.INSTALL_PORTABLE_DIR }} --component portable
+          cmake --install ${{ env.BUILD_DIR }} --prefix ./
+          #cmake --install ${{ env.BUILD_DIR }} --prefix ./ --component portable
 
-          cd ${{ env.INSTALL_PORTABLE_DIR }}
+          #cd ${{ env.INSTALL_PORTABLE_DIR }}
           tar -czf ../WarpWriggleCLI.tar.gz *
 
       
