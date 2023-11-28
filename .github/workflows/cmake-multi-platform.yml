@@ -93,5 +93,5 @@ jobs:
       uses: actions/download-artifact@v2.1.1
       with:
           name: WarWriggleCLI
-          path: WarpWriggleCLI.tar.gz
+          path: ${{ env.BUILD_DIR }}/WarpWriggleCLI.tar.gz
               
