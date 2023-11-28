@@ -93,6 +93,6 @@ jobs:
     - name: Upload binary tarball (Linux, portable)
       uses: actions/download-artifact@v2.1.1
       with:
-          name: WarWriggleCLI
-          path: ${{ env.BUILD_DIR }}/WarpWriggleCLI.tar.gz
+          name: WarpWriggleCLI
+          path: ../WarpWriggleCLI.tar.gz
               
