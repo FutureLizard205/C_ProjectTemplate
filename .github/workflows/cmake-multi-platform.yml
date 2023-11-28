@@ -12,6 +12,10 @@ jobs:
   build:
     runs-on: ${{ matrix.os }}
 
+    env:
+      INSTALL_PORTABLE_DIR: "install-portable"
+      BUILD_DIR: ${{ steps.strings.outputs.build-output-dir }}
+  
     strategy:
       # Set fail-fast to false to ensure that feedback is delivered for all matrix combinations. Consider changing this to true when your workflow is stable.
       fail-fast: false
@@ -74,10 +78,19 @@ jobs:
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest --build-config ${{ matrix.build_type }}
 
+    - name: Package (Linux, portable)
+      if: runner.os == 'Linux'
+      run: |
+          cmake --install ${{ env.BUILD_DIR }} --prefix ${{ env.INSTALL_PORTABLE_DIR }}
+          cmake --install ${{ env.BUILD_DIR }} --prefix ${{ env.INSTALL_PORTABLE_DIR }} --component portable
+
+          cd ${{ env.INSTALL_PORTABLE_DIR }}
+          tar -czf ../WarpWriggleCLI.tar.gz *
+
       
-    - name: Download a Build Artifact
+    - name: Upload binary tarball (Linux, portable)
       uses: actions/download-artifact@v2.1.1
       with:
-          name: Artifacts
-          path: ${{ steps.strings.outputs.build-output-dir }}
+          name: WarWriggleCLI
+          path: WarpWriggleCLI.tar.gz
               
