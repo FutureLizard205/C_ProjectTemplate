@@ -13,7 +13,6 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     env:
-      INSTALL_PORTABLE_DIR: "install-portable"
       BUILD_DIR: "build"
   
     strategy:
@@ -37,9 +36,6 @@ jobs:
           - os: ubuntu-latest
             c_compiler: gcc
             cpp_compiler: g++
-          - os: ubuntu-latest
-            c_compiler: clang
-            cpp_compiler: clang++
         exclude:
           - os: windows-latest
             c_compiler: gcc
@@ -47,6 +43,9 @@ jobs:
             c_compiler: clang
           - os: ubuntu-latest
             c_compiler: cl
+          - os: ubuntu-latest
+            c_compiler: clang
+            cpp_compiler: clang++
 
     steps:
     - uses: actions/checkout@v3
@@ -82,20 +81,12 @@ jobs:
       if: runner.os == 'Linux'
       run: |
           cmake --install ${{ env.BUILD_DIR }} --prefix ./
-          #cmake --install ${{ env.BUILD_DIR }} --prefix ./ --component portable
-
-          #cd ${{ env.INSTALL_PORTABLE_DIR }}
-          tar -czf WarpWriggleCLI.tar.gz *
-          echo $PWD && ls -lah
-
-    - name: Test
-      run:
-        echo $PWD && ls -lah
-
+          mv build/WarpWriggleCLI .
+          tar -czf WarpWriggleCLI.tar.gz WarpWriggleCLI
       
     - name: Upload binary tarball (Linux, portable)
       uses: actions/upload-artifact@v3.1.3
       with:
-        name: WarpWrillgeCLI
+        name: WarpWrillgeCLI (Linux)
         path: WarpWriggleCLI.tar.gz
               
