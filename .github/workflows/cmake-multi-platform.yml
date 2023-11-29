@@ -91,8 +91,7 @@ jobs:
 
     - name: Test
       run:
-        echo $PWD
-        ls -lah
+        echo $PWD && ls -lah
 
       
     - name: Upload binary tarball (Linux, portable)
