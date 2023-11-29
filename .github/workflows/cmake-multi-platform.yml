@@ -86,8 +86,7 @@ jobs:
 
           #cd ${{ env.INSTALL_PORTABLE_DIR }}
           tar -czf ../WarpWriggleCLI.tar.gz *
-          cd ..
-          ls
+          echo $PWD && ls -lah
 
     - name: Test
       run:
