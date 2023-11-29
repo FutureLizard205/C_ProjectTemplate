@@ -3,7 +3,14 @@
 //
 
 #include <stdint.h>
-#include <time.h>
+
+#if _WIN32
+#include <windows.h>
+#define msWait(x) Sleep(x)
+#else
+#include <unistd.h>
+#define msWait(x) usleep(x*1000)
+#endif
 
 #include "globalvariables.h"
 #include "mapmanager.h"
@@ -15,13 +22,10 @@ int main() {
     loadMap("mapfilename");
 
     int_fast16_t msTimeWait = 500;
-    struct timespec ts;
-    ts.tv_sec = msTimeWait / 1000;
-    ts.tv_nsec = (msTimeWait % 1000) * 1000000;
 
     for (int i = 0; i < 5; i++) {
         drawMap();
-        nanosleep(&ts, NULL);
+        msWait(msTimeWait);
     }
 
 
