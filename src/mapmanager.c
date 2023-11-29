@@ -1,6 +1,3 @@
-#include <libgen.h>
-#include <stdint.h>
-#include <wchar.h>
 #include "mapmanager.h"
 
 /*

@@ -2,6 +2,7 @@
 #define WARPWRIGGLECLI_MAPMANAGER_H
 
 #include <stdio.h>
+#include <stdint.h>
 #include "globalvariables.h"
 
 int tileType(const uint_fast8_t tileCode);
