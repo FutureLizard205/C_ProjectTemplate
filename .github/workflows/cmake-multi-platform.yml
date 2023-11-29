@@ -89,6 +89,10 @@ jobs:
           cd ..
           ls
 
+    - name: Test
+      run:
+        echo $PWD
+
       
     - name: Upload binary tarball (Linux, portable)
       uses: actions/upload-artifact@v3.1.3
