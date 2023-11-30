@@ -4,7 +4,7 @@
 
 #include <stdint.h>
 #include <locale.h>
-#define _O_U8TEXT 0x00040000
+#include <fcntl.h>
 
 #if _WIN32
 #include <windows.h>
@@ -21,7 +21,13 @@
 uint_fast8_t mapTiles[256];
 
 int main() {
-    _setmode(_fileno(stdout), _O_U8TEXT);
+    #ifdef __CYGWIN__
+    setmode(fileno(my_stdio_stream), O_BINARY);
+    #elif _WIN32
+    _setmode(_fileno(my_stdio_stream), _O_BINARY);
+    #else
+    /* nothing on systems with no text-vs-binary mode */
+    #endif
     setlocale(LC_CTYPE, "");    // use the locale configured in the execution environment, be it Linux or Windows
 
     loadMap("mapfilename");
