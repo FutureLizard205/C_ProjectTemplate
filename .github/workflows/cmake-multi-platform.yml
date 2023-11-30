@@ -78,9 +78,10 @@ jobs:
     - name: Package (Linux, portable)
       if: runner.os == 'Linux'
       run: |
-          cmake --install ${{ env.BUILD_DIR }} --prefix ./
-          mkdir output
-          mv build/WarpWriggleCLI output/
+        cmake --install ${{ env.BUILD_DIR }} --prefix ./
+        mkdir output
+        mv build/WarpWriggleCLI output/
+        chmod +x output/WarpWriggleCLI
 
     - name: Package (Windows, portable)
       if: runner.os == 'Windows'
