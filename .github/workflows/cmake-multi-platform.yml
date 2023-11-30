@@ -83,7 +83,7 @@ jobs:
         mv build/WarpWriggleCLI output/
         chmod +x output/WarpWriggleCLI
         cd output
-        zip WarpWrillgeCLI\  (Linux,\ portable,\ ${{ matrix.c_compiler }}) *
+        zip WarpWrillgeCLI\  \(Linux,\ portable,\ ${{ matrix.c_compiler }}\) *
         cd ..
 
     - name: Package (Windows, portable)
