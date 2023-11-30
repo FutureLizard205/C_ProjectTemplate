@@ -3,6 +3,8 @@
 //
 
 #include <stdint.h>
+#include <locale.h>
+#include <fcntl.h>
 
 #if _WIN32
 #include <windows.h>
@@ -19,6 +21,9 @@
 uint_fast8_t mapTiles[256];
 
 int main() {
+    _setmode(_fileno(stdout), _O_U8TEXT);
+    setlocale(LC_CTYPE, "");    // use the locale configured in the execution environment, be it Linux or Windows
+
     loadMap("mapfilename");
 
     int_fast16_t msTimeWait = 500;
