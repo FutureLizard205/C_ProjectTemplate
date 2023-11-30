@@ -96,7 +96,7 @@ jobs:
         cd x64
         dir
         cd ..
-        move build/WarpWriggleCLI.exe output/
+        move build/Release/WarpWriggleCLI.exe output/
       
     - name: Upload artifact (Linux, portable)
       if: runner.os == 'Linux'
