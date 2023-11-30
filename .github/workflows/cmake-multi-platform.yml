@@ -82,6 +82,9 @@ jobs:
         mkdir output
         mv build/WarpWriggleCLI output/
         chmod +x output/WarpWriggleCLI
+        cd output
+        zip WarpWriggleCLI *
+        cd ..
 
     - name: Package (Windows, portable)
       if: runner.os == 'Windows'
@@ -102,4 +105,4 @@ jobs:
       uses: actions/upload-artifact@v3.1.3
       with:
         name: WarpWrillgeCLI (Windows, portable, ${{ matrix.c_compiler }})
-        path: output/
+        path: output/WarpWriggleCLI.zip
