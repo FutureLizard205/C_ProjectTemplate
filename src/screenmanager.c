@@ -1,7 +1,7 @@
 #include "screenmanager.h"
 
 
-static const wchar_t floor = 0x0020;       // (space)
+static const wchar_t wcharCode_Floor = 0x0020;       // (space)
 
 static const wchar_t wall[16] = {
         0x26AC,       // ⚬
@@ -34,7 +34,7 @@ void drawMap() {
     for (int x = 0; x < 16; x++) {
         switch (tileType(mapTiles[x])) {
             case 0:
-                wprintf(L"%lc", floor);
+                wprintf(L"%lc", wcharCode_Floor);
                 break;
 
             case 1:
