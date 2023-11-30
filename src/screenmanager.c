@@ -29,10 +29,7 @@ void clearScreen() {
 
 
 void drawMap() {
-    setlocale(LC_CTYPE, "");    // use the locale configured in the execution environment, be it Linux or Windows
-
-
-
+    
     clearScreen();
     for (int x = 0; x < 16; x++) {
         switch (tileType(mapTiles[x])) {
