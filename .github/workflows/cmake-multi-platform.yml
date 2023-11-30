@@ -95,6 +95,7 @@ jobs:
         cd ..
         cd x64
         dir
+        cd ..
         move build/WarpWriggleCLI.exe output/
       
     - name: Upload artifact (Linux, portable)
