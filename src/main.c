@@ -4,7 +4,7 @@
 
 #include <stdint.h>
 #include <locale.h>
-#include <fcntl.h>
+#define _O_U8TEXT 0x00040000
 
 #if _WIN32
 #include <windows.h>
