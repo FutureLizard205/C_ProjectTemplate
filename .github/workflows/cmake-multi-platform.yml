@@ -87,15 +87,6 @@ jobs:
       run: |
         cmake --install ${{ env.BUILD_DIR }} --prefix ./
         mkdir output
-        dir
-        cd build
-        dir
-        cd Release
-        dir
-        cd ..
-        cd x64
-        dir
-        cd ..
         move build/Release/WarpWriggleCLI.exe output/
       
     - name: Upload artifact (Linux, portable)
