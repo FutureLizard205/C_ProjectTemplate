@@ -31,7 +31,7 @@ jobs:
           - os: ubuntu-latest
             c_compiler: clang
         exclude:
-          - os: ubunntu-latest
+          - os: ubuntu-latest
             c_compiler: cl
 
 
