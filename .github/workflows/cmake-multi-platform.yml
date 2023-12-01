@@ -65,7 +65,7 @@ jobs:
         mv build/WarpWriggleCLI output/
         chmod +x output/WarpWriggleCLI
         cd output
-        zip WarpWrillgeCLI *
+        zip WarpWriggleCLI *
         cd ..
 
     - name: Package (Windows, portable)
@@ -75,19 +75,19 @@ jobs:
         mkdir output
         move build/Release/WarpWriggleCLI.exe output/
         cd output
-        7z a -tzip WarpWrillgeCLI.zip *
+        7z a -tzip WarpWriggleCLI.zip *
         cd ..
       
     - name: Upload artifact (Linux, portable)
       if: runner.os == 'Linux'
       uses: actions/upload-artifact@v3.1.3
       with:
-        name: WarpWrillgeCLI (Linux, portable, ${{ matrix.c_compiler }})
+        name: WarpWriggleCLI (Linux, portable, ${{ matrix.c_compiler }})
         path: output/*.zip
               
     - name: Upload artifact (Windows, portable)
       if: runner.os == 'Windows'
       uses: actions/upload-artifact@v3.1.3
       with:
-        name: WarpWrillgeCLI (Windows, portable, ${{ matrix.c_compiler }})
+        name: WarpWriggleCLI (Windows, portable, ${{ matrix.c_compiler }})
         path: output/*.zip
