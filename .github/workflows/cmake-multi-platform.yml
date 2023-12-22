@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 env:
-  project_name: ProjectName
+  PROJECT_NAME: ProjectName
 
 jobs:
   build:
@@ -65,11 +65,11 @@ jobs:
       run: |
         cmake --install build --prefix ./
         mkdir output
-        mv build/${{ project_name }} output/
+        mv build/${{ PROJECT_NAME }} output/
         cp -r assets/ output/
-        chmod +x output/${{ project_name }}
+        chmod +x output/${{ PROJECT_NAME }}
         cd output
-        zip ${{ project_name }} *
+        zip ${{ PROJECT_NAME }} *
         cd ..
 
     - name: Package (Windows, portable)
@@ -77,22 +77,22 @@ jobs:
       run: |
         cmake --install build --prefix ./
         mkdir output
-        move build/Release/${{ project_name }}.exe output/
+        move build/Release/${{ PROJECT_NAME }}.exe output/
         xcopy assets/ output/
         cd output
-        7z a -tzip ${{ project_name }}.zip *
+        7z a -tzip ${{ PROJECT_NAME }}.zip *
         cd ..
       
     - name: Upload artifact (Linux, portable)
       if: runner.os == 'Linux'
       uses: actions/upload-artifact@v3.1.3
       with:
-        name: ${{ project_name }} (Linux, portable, ${{ matrix.c_compiler }})
+        name: ${{ PROJECT_NAME }} (Linux, portable, ${{ matrix.c_compiler }})
         path: output/*.zip
               
     - name: Upload artifact (Windows, portable)
       if: runner.os == 'Windows'
       uses: actions/upload-artifact@v3.1.3
       with:
-        name: ${{ project_name }} (Windows, portable, ${{ matrix.c_compiler }})
+        name: ${{ PROJECT_NAME }} (Windows, portable, ${{ matrix.c_compiler }})
         path: output/*.zip
