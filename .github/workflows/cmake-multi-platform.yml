@@ -76,7 +76,7 @@ jobs:
         move build/Release/ProjectName.exe output/
         xcopy assets output
         cd output
-        7z a -tzip ProjectName.zip -r .
+        7z a -tzip ProjectName.zip .
         cd ..
       
     - name: Upload artifact (Linux, portable)
