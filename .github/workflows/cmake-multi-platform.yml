@@ -35,9 +35,6 @@ jobs:
             c_compiler: cl
 
     steps:
-    - env:
-        PROJECT_NAME: "ProjectName"
-
     - uses: actions/checkout@v3
 
     - name: Configure CMake
@@ -64,11 +61,11 @@ jobs:
       run: |
         cmake --install build --prefix ./
         mkdir output
-        mv build/${{ PROJECT_NAME }} output/
+        mv build/ProjectName output/
         cp -r assets/ output/
-        chmod +x output/${{ PROJECT_NAME }}
+        chmod +x output/ProjectName
         cd output
-        zip ${{ PROJECT_NAME }} *
+        zip ProjectName *
         cd ..
 
     - name: Package (Windows, portable)
@@ -76,22 +73,22 @@ jobs:
       run: |
         cmake --install build --prefix ./
         mkdir output
-        move build/Release/${{ PROJECT_NAME }}.exe output/
+        move build/Release/ProjectName.exe output/
         xcopy assets/ output/
         cd output
-        7z a -tzip ${{ PROJECT_NAME }}.zip *
+        7z a -tzip ProjectName.zip *
         cd ..
       
     - name: Upload artifact (Linux, portable)
       if: runner.os == 'Linux'
       uses: actions/upload-artifact@v3.1.3
       with:
-        name: ${{ PROJECT_NAME }} (Linux, portable, ${{ matrix.c_compiler }})
+        name: ProjectName (Linux, portable, ${{ matrix.c_compiler }})
         path: output/*.zip
               
     - name: Upload artifact (Windows, portable)
       if: runner.os == 'Windows'
       uses: actions/upload-artifact@v3.1.3
       with:
-        name: ${{ PROJECT_NAME }} (Windows, portable, ${{ matrix.c_compiler }})
+        name: ProjectName (Windows, portable, ${{ matrix.c_compiler }})
         path: output/*.zip
