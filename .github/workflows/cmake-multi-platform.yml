@@ -6,13 +6,13 @@ on:
   pull_request:
     branches: [ "main" ]
 
-env:
-  PROJECT_NAME: "ProjectName"
-
 jobs:
   build:
     runs-on: ${{ matrix.os }}
-  
+
+    env:
+      PROJECT_NAME: ProjectName
+
     strategy:
       # Set fail-fast to false in order to ensure that feedback is delivered for all matrix combinations. Consider changing this to true when your workflow is stable.
       fail-fast: false
