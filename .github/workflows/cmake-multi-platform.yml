@@ -75,7 +75,7 @@ jobs:
         mkdir output
         move build/Release/ProjectName.exe output/
         mkdir output/assets
-        xcopy assets output/assets
+        xcopy assets output\assets
         cd output
         7z a -tzip ProjectName.zip .
         cd ..
