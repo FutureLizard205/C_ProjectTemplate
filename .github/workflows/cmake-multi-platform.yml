@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ "main" ]
 
+env:
+  project_name: ProjectName
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -62,10 +65,11 @@ jobs:
       run: |
         cmake --install build --prefix ./
         mkdir output
-        mv build/WarpWriggleCLI output/
-        chmod +x output/WarpWriggleCLI
+        mv build/${{ project_name }} output/
+        cp -r assets/ output/
+        chmod +x output/${{ project_name }}
         cd output
-        zip WarpWriggleCLI *
+        zip ${{ project_name }} *
         cd ..
 
     - name: Package (Windows, portable)
@@ -73,21 +77,22 @@ jobs:
       run: |
         cmake --install build --prefix ./
         mkdir output
-        move build/Release/WarpWriggleCLI.exe output/
+        move build/Release/${{ project_name }}.exe output/
+        xcopy assets/ output/
         cd output
-        7z a -tzip WarpWriggleCLI.zip *
+        7z a -tzip ${{ project_name }}.zip *
         cd ..
       
     - name: Upload artifact (Linux, portable)
       if: runner.os == 'Linux'
       uses: actions/upload-artifact@v3.1.3
       with:
-        name: WarpWriggleCLI (Linux, portable, ${{ matrix.c_compiler }})
+        name: ${{ project_name }} (Linux, portable, ${{ matrix.c_compiler }})
         path: output/*.zip
               
     - name: Upload artifact (Windows, portable)
       if: runner.os == 'Windows'
       uses: actions/upload-artifact@v3.1.3
       with:
-        name: WarpWriggleCLI (Windows, portable, ${{ matrix.c_compiler }})
+        name: ${{ project_name }} (Windows, portable, ${{ matrix.c_compiler }})
         path: output/*.zip

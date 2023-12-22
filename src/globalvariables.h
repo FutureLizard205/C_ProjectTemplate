@@ -1,8 +1,0 @@
-#ifndef WARPWRIGGLECLI_GLOBALVARIABLES_H
-#define WARPWRIGGLECLI_GLOBALVARIABLES_H
-
-#include <inttypes.h>
-
-extern uint_fast8_t mapTiles[256];
-
-#endif //WARPWRIGGLECLI_GLOBALVARIABLES_H
