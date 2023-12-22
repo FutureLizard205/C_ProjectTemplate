@@ -74,7 +74,7 @@ jobs:
         cmake --install build --prefix ./
         mkdir output
         move build/Release/ProjectName.exe output/
-        xcopy assets output
+        xcopy assets output/assets
         cd output
         7z a -tzip ProjectName.zip .
         cd ..
