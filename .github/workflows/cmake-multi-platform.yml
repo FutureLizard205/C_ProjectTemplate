@@ -65,7 +65,7 @@ jobs:
         cp -r assets/ output/
         chmod +x output/ProjectName
         cd output
-        7z a -mm=Deflate -mfb=258 -mpass=15 -mx=9 -ms=on -tzip ProjectName.zip .
+        7z a -mm=Deflate -mfb=258 -mpass=15 -mx=9 -tzip ProjectName.zip .
         cd ..
 
     - name: Package (Windows, portable)
@@ -76,7 +76,7 @@ jobs:
         move build/Release/ProjectName.exe output/
         xcopy /S /I /E assets output\assets
         cd output
-        7z a -mtm- -mm=Deflate -mfb=258 -mpass=15 -mx=9 -ms=on -tzip ProjectName.zip .
+        7z a -mtm- -mm=Deflate -mfb=258 -mpass=15 -mx=9 -tzip ProjectName.zip .
         cd ..
       
     - name: Upload artifact (Linux, portable)
