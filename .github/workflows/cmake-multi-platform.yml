@@ -65,7 +65,7 @@ jobs:
         cp -r assets/ output/
         chmod +x output/ProjectName
         cd output
-        zip -r ProjectName *
+        zip --compression-method deflate -9 -r ProjectName *
         cd ..
 
     - name: Package (Windows, portable)
