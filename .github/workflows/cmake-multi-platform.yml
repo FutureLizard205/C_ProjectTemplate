@@ -61,11 +61,11 @@ jobs:
       run: |
         cmake --install build --prefix ./
         mkdir output
-        mv build/ProjectName output/
+        mv build/* output/
+        chmod +x output/*
         cp -r assets/ output/
-        chmod +x output/ProjectName
         cd output
-        7z a -mm=Deflate -mfb=258 -mpass=15 -mx=9 -tzip ProjectName.zip .
+        7z a -mm=Deflate -mfb=128 -mpass=10 -mx=8 -r -tzip ProjectName.zip .
         cd ..
 
     - name: Package (Windows, portable)
@@ -73,14 +73,14 @@ jobs:
       run: |
         cmake --install build --prefix ./
         mkdir output
-        move build/Release/ProjectName.exe output/
+        move build/Release/*.exe output/
         xcopy /S /I /E assets output\assets
         cd output
-        7z a -mtm- -mm=Deflate -mfb=258 -mpass=15 -mx=9 -tzip ProjectName.zip .
+        7z a -mm=Deflate -mfb=128 -mpass=10 -mx=8 -r -tzip ProjectName.zip .
         cd ..
       
     - name: Upload artifact
       uses: actions/upload-artifact@v3.1.3
       with:
-        name: ${{ CMAKE_PROJECT_NAME }} (${{ runner.os }}, ${{ matrix.c_compiler }}, portable)
+        name: ${{ github.event.repository.name }} (${{ runner.os }}, ${{ matrix.c_compiler }}, portable)
         path: output/*.zip
