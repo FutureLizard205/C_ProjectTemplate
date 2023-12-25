@@ -63,11 +63,11 @@ jobs:
       run: |
         cmake --install build --prefix ./
         mkdir output
-        mv build/ProjectName output/
+        rsync -av --exclude='*.txt' --exclude='*.cmake' --exclude='Makefile' --exclude='CMakeFiles/' --exclude='Testing/' build/ output/
+        chmod +x output/*
         cp -r assets/ output/
-        chmod +x output/ProjectName
         cd output
-        7z a -mm=Deflate -mfb=258 -mpass=15 -mx=9 -tzip package.zip .
+        7z a -mm=Deflate -mfb=128 -mpass=10 -mx=8 -tzip ${{ github.event.repository.name }}.zip .
         cd ..
 
     - name: Package (Windows, portable)
@@ -75,16 +75,16 @@ jobs:
       run: |
         cmake --install build --prefix ./
         mkdir output
-        move build/Release/ProjectName.exe output/
+        move build/Release/*.exe output/
         xcopy /S /I /E assets output\assets
         cd output
-        7z a -mtm- -mm=Deflate -mfb=258 -mpass=15 -mx=9 -tzip package.zip .
+        7z a -mm=Deflate -mfb=128 -mpass=10 -mx=8 -tzip ${{ github.event.repository.name }}.zip .
         cd ..
 
     - name: Upload to release
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        asset_name: ProjectName_v$tag-${{ runner.os }}-${{ matrix.c_compiler }}-portable.zip
+        asset_name: ${{ github.event.repository.name }}_v$tag-${{ runner.os }}-${{ matrix.c_compiler }}-portable.zip
         file: output/package.zip
         tag: ${{ github.ref }}
