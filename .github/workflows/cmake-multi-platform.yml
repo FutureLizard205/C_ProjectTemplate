@@ -82,5 +82,5 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v3.1.3
       with:
-        name: ProjectName (${{ runner.os }}, ${{ matrix.c_compiler }}, portable)
+        name: ${{ CMAKE_PROJECT_NAME }} (${{ runner.os }}, ${{ matrix.c_compiler }}, portable)
         path: output/*.zip
