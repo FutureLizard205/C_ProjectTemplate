@@ -81,10 +81,10 @@ jobs:
         7z a -mtm- -mm=Deflate -mfb=258 -mpass=15 -mx=9 -tzip ProjectName.zip .
         cd ..
 
-    - name: Upload binaries to release
+    - name: Upload to release
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        asset_name: ProjectName ${{ github.ref }} (Linux, portable, ${{ matrix.c_compiler }})
+        asset_name: ProjectName ${{ github.ref }} (${{ matrix.os }}, portable, ${{ matrix.c_compiler }})
         file: output/ProjectName.zip
         tag: ${{ github.ref }}
