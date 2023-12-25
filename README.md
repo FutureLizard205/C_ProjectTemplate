@@ -1,1 +1,1 @@
-# Template for C projects
+### Template for C projects
