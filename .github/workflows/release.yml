@@ -67,7 +67,7 @@ jobs:
         chmod +x output/*
         cp -r assets/ output/
         cd output
-        7z a -mm=Deflate -mfb=128 -mpass=10 -mx=8 -tzip ${{ github.event.repository.name }}.zip .
+        7z a -mm=Deflate -mfb=128 -mpass=10 -mx=8 -tzip package.zip .
         cd ..
 
     - name: Package (Windows, portable)
@@ -78,7 +78,7 @@ jobs:
         move build/Release/*.exe output/
         xcopy /S /I /E assets output\assets
         cd output
-        7z a -mm=Deflate -mfb=128 -mpass=10 -mx=8 -tzip ${{ github.event.repository.name }}.zip .
+        7z a -mm=Deflate -mfb=128 -mpass=10 -mx=8 -tzip package.zip .
         cd ..
 
     - name: Upload to release
