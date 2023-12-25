@@ -85,6 +85,6 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: output/*.zip
+        asset_name: ProjectName ${{ github.ref }} (Linux, portable, ${{ matrix.c_compiler }})
+        file: output/ProjectName.zip
         tag: ${{ github.ref }}
-        file_glob: true
