@@ -67,7 +67,7 @@ jobs:
         cp -r assets/ output/
         chmod +x output/ProjectName
         cd output
-        7z a -mm=Deflate -mfb=258 -mpass=15 -mx=9 -tzip ProjectName.zip .
+        7z a -mm=Deflate -mfb=258 -mpass=15 -mx=9 -tzip package.zip .
         cd ..
 
     - name: Package (Windows, portable)
@@ -78,13 +78,13 @@ jobs:
         move build/Release/ProjectName.exe output/
         xcopy /S /I /E assets output\assets
         cd output
-        7z a -mtm- -mm=Deflate -mfb=258 -mpass=15 -mx=9 -tzip ProjectName.zip .
+        7z a -mtm- -mm=Deflate -mfb=258 -mpass=15 -mx=9 -tzip package.zip .
         cd ..
 
     - name: Upload to release
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        asset_name: ProjectName ${{ github.ref }} (${{ matrix.os }}, portable, ${{ matrix.c_compiler }})
-        file: output/ProjectName.zip
+        asset_name: ProjectName\ ${{ github.ref }}\ (${{ matrix.os }},\ portable,\ ${{ matrix.c_compiler }}).zip
+        file: output/package.zip
         tag: ${{ github.ref }}
