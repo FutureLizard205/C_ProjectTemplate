@@ -79,16 +79,8 @@ jobs:
         7z a -mtm- -mm=Deflate -mfb=258 -mpass=15 -mx=9 -tzip ProjectName.zip .
         cd ..
       
-    - name: Upload artifact (Linux, portable)
-      if: runner.os == 'Linux'
+    - name: Upload artifact
       uses: actions/upload-artifact@v3.1.3
       with:
-        name: ProjectName (Linux, portable, ${{ matrix.c_compiler }})
-        path: output/*.zip
-              
-    - name: Upload artifact (Windows, portable)
-      if: runner.os == 'Windows'
-      uses: actions/upload-artifact@v3.1.3
-      with:
-        name: ProjectName (Windows, portable, ${{ matrix.c_compiler }})
+        name: ProjectName (${{ runner.os }}, ${{ matrix.c_compiler }}, portable)
         path: output/*.zip
