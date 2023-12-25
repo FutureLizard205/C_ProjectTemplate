@@ -61,11 +61,11 @@ jobs:
       run: |
         cmake --install build --prefix ./
         mkdir output
-        mv build/* output/
+        rsync -av --exclude='*.txt' --exclude='*.cmake' --exclude='Makefile' --exclude='CMakeFiles/' --exclude='Testing/' build/ output/
         chmod +x output/*
         cp -r assets/ output/
         cd output
-        7z a -mm=Deflate -mfb=128 -mpass=10 -mx=8 -r -tzip ProjectName.zip .
+        7z a -mm=Deflate -mfb=128 -mpass=10 -mx=8 -tzip ${{ github.event.repository.name }}.zip .
         cd ..
 
     - name: Package (Windows, portable)
@@ -76,7 +76,7 @@ jobs:
         move build/Release/*.exe output/
         xcopy /S /I /E assets output\assets
         cd output
-        7z a -mm=Deflate -mfb=128 -mpass=10 -mx=8 -r -tzip ProjectName.zip .
+        7z a -mm=Deflate -mfb=128 -mpass=10 -mx=8 -tzip ${{ github.event.repository.name }}.zip .
         cd ..
       
     - name: Upload artifact
