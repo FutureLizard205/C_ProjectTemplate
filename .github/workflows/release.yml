@@ -9,6 +9,8 @@ jobs:
   publish:
     name: Publish for ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
 
     strategy:
       # Set fail-fast to false in order to ensure that feedback is delivered for all matrix combinations. Consider changing this to true when your workflow is stable.
